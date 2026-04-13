@@ -295,7 +295,7 @@ static void print_help(const char *argv0)
 {
     printf("\nLitterae Finis - by Trauma\n\n");
     printf("1st place textmode demo, TMDC 2012\n\n");
-    printf("Sound: Cube - Starchild\n\n");
+    printf("Sound: !Cube - Starchild\n\n");
     printf("Usage: %s -c | -w [-s N]\n\n", argv0);
     printf("Options:\n");
     printf("  -c      Run in console/terminal mode (ANSI output)\n");
