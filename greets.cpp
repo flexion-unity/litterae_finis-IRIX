@@ -1,16 +1,12 @@
-#include <windows.h>
 #include <stdio.h>
 #include "textfx.h"
-#include "conio.h"
 
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <gl/tfxswgl.h>
+#include <GL/tfxswgl.h>
 #include "stb_image.h"
 
 #define SMOOTHSTEP(x) ((x)*(x)*(3-2*(x)))
-#pragma STFU(4305) // double-float
-#pragma STFU(4018) // signed/unsigned mismatch
 
 extern int chartex[12*8*128];
 void initwell(int v);

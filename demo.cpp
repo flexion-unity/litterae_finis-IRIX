@@ -1,11 +1,11 @@
-#include <windows.h>
 #include <stdio.h>
+#include <stdarg.h>
+#include <unistd.h>
 #include "textfx.h"
-#include "conio.h"
 
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <gl/tfxswgl.h>
+#include <GL/tfxswgl.h>
 #include "stb_image.h"
 
 #include "vertexbuffer.h"
@@ -14,14 +14,13 @@
 #define SMOOTHSTEP(x) ((x)*(x)*(3-2*(x)))
 //#define STARTTICK 135000 //150000
 
-#include "fmod.h"
-
-#pragma STFU(4305) // double-float
-#pragma STFU(4018) // signed/unsigned mismatch
-
-FSOUND_STREAM *stream;
+extern unsigned int linux_tick_ms();
+extern int _kbhit();
 
 #define SOUND
+#include "fmod_compat.h"
+
+FSOUND_STREAM *stream;
 
 GLuint texture[3];
 int * fb;
@@ -73,12 +72,25 @@ int LoadGLTextures( )
     int i, j;
 	glGenTextures(3, &texture[0]);
 
+    // Always allocate textures 1 and 2 so the rasterizer always has valid pixmaps
+	glBindTexture(GL_TEXTURE_2D, texture[1]);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 256, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glBindTexture(GL_TEXTURE_2D, texture[2]);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 256, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+
     // Load texture using stb
 	int x, y, n;
 	unsigned char *data = stbi_load("data/traumalogo.png", &x, &y, &n, 4);
-    
+
     if (data == NULL)
+    {
+        // No image file: create a 4x4 gray placeholder so texture[0] has a valid pixmap
+        unsigned char placeholder[4*4*4];
+        memset(placeholder, 0x80, sizeof(placeholder));
+        glBindTexture(GL_TEXTURE_2D, texture[0]);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 4, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, placeholder);
         return 0;
+    }
 
     int l, w, h;
     w = x;
@@ -94,14 +106,11 @@ int LoadGLTextures( )
     {
         for (j = 0; j < w; j++)
         {
-            if ((src[i * w + j] & 0xff000000) == 0)
+            // Alpha is always byte 3 in stb_image's RGBA output regardless of endianness
+            if (((unsigned char *)src)[(i * w + j) * 4 + 3] == 0)
                 src[i * w + j] = 0;
         }
     }
-	glBindTexture(GL_TEXTURE_2D, texture[1]);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 256, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL); // NULL should be ok, just allocate
-	glBindTexture(GL_TEXTURE_2D, texture[2]);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 256, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL); // NULL should be ok, just allocate
 
 	glBindTexture(GL_TEXTURE_2D, texture[0]);
 
@@ -253,10 +262,7 @@ void reshape( int width, int height )
 /* general OpenGL initialization function */
 void init( void )
 {
-
-    /* Load in the texture */
-    if ( !LoadGLTextures( ) )
-	    puts("Textures no loading!!!!!");
+    LoadGLTextures();
 
     /* Enable Texture Mapping ( NEW ) */
     glEnable( GL_TEXTURE_2D );
@@ -272,9 +278,6 @@ void init( void )
 
     /* Enables Depth Testing */
     glEnable( GL_DEPTH_TEST );
-
-    /* The Type Of Depth Test To Do */
-//    glDepthFunc( GL_LEQUAL );
 
     /* Really Nice Perspective Calculations */
     glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );
@@ -868,7 +871,7 @@ void demomain()
 //	getch();
 #ifdef SOUND
     FSOUND_Init(44100, 1, 0);
-	stream = FSOUND_Stream_Open("data/!cube - starchild.mp3",FSOUND_MPEGACCURATE,0,0);
+	stream = FSOUND_Stream_Open("data/Cube - Starchild.mp3",FSOUND_MPEGACCURATE,0,0);
     FSOUND_Stream_SetMode(stream,FSOUND_LOOP_OFF);
 #endif
 	TFX_AsciiArt caa;
@@ -919,7 +922,7 @@ void demomain()
 #ifndef STARTTICK
 #define STARTTICK 0
 #endif
-#define TICK (GetTickCount()-starttick + STARTTICK)
+#define TICK (linux_tick_ms()-starttick + STARTTICK)
 
 #endif
 
@@ -932,7 +935,7 @@ void demomain()
                 
     while(!_kbhit() && tick < 203500)
     {
-        while (tick>=TICK) {Sleep(1);};
+        while (tick>=TICK) {usleep(1000);};
         int totick = TICK;
         
         while (tick < totick)

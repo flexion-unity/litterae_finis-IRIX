@@ -167,7 +167,7 @@ void TFX_AsciiArt::BuildLUT()
 
 
 
-void TFX_AsciiArt::Dump2x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
+void TFX_AsciiArt::Dump2x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
 {
     assert(mAsciiMap!=NULL);
     int xsize = (aSrcQuad.x1 - aSrcQuad.x0) / 2;

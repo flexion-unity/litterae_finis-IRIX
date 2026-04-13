@@ -53,7 +53,7 @@ void TFX_TCConverter::SetOptions(int option)
 }
 
 
-void TFX_TCConverter::Dump1x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
+void TFX_TCConverter::Dump1x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
 {
     int xsize = (aSrcQuad.x1 - aSrcQuad.x0);
     int ysize = (aSrcQuad.y1 - aSrcQuad.y0);
@@ -83,7 +83,7 @@ void TFX_TCConverter::Dump1x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int
 }
 
 
-void TFX_TCConverter::Dump4x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
+void TFX_TCConverter::Dump4x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
 {
     int xsize = (aSrcQuad.x1 - aSrcQuad.x0) / 2;
     int ysize = (aSrcQuad.y1 - aSrcQuad.y0) / 2;

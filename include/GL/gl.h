@@ -14,8 +14,6 @@
 #include "gtc/matrix_transform.hpp"
 #include "gtc/type_ptr.hpp"
 
-#define STFU(x) warning(disable: x)
-#pragma STFU(4244) // conversion from float to float, possible loss of data
 
 
 extern "C" {
