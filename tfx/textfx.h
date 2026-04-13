@@ -86,11 +86,11 @@ public:
     // Build look-up table. 
     virtual void BuildLUT() = 0;
     // Dump source buffer to target, 1x1->1x1 sampling
-    virtual void Dump1x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch =  80, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
+    virtual void Dump1x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch =  80, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
     // Dump source buffer to target, 2x2->1x1 sampling 
-    virtual void Dump2x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch = 160, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer) = 0;
+    virtual void Dump2x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch = 160, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer) = 0;
     // Dump source buffer to target, 4x4->1x1 sampling 
-    virtual void Dump4x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch = 320, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
+    virtual void Dump4x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch = 320, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
     TFX_TCConverter();
     virtual ~TFX_TCConverter();
     virtual void SetOptions(int option);
@@ -107,11 +107,11 @@ public:
     // Build look-up table. 
     virtual void BuildLUT();
     // Dump source buffer to target, 1x1->1x1 sampling
-    virtual void Dump1x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch =  80, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
+    virtual void Dump1x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch =  80, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
     // Dump source buffer to target, 2x2->1x1 sampling 
-    virtual void Dump2x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch = 160, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
+    virtual void Dump2x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch = 160, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
     // Dump source buffer to target, 4x4->1x1 sampling 
-    virtual void Dump4x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch = 320, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
+    virtual void Dump4x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch = 320, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
     virtual ~TFX_BlockColor();
 private:
     void CalcColor(int aRed, int aGreen, int aBlue, int offset);
@@ -127,7 +127,7 @@ public:
     // Build look-up table. 
     virtual void BuildLUT();
     // Dump source buffer to target, 2x2->1x1 sampling 
-    virtual void Dump2x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch = 160, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
+    virtual void Dump2x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch = 160, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
     virtual ~TFX_HalfBlockColor();
 private:
     // Calculate single color. Colors are in 0..255 range.
@@ -144,7 +144,7 @@ public:
     // Build look-up table. 
     virtual void BuildLUT();
     // Dump source buffer to target, 2x2->1x1 sampling 
-    virtual void Dump2x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch = 160, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
+    virtual void Dump2x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch = 160, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
     virtual ~TFX_AsciiArt();
 protected:
     unsigned char *mAsciiMap;
@@ -157,7 +157,7 @@ class TFX_ColAsciiArt : public TFX_AsciiArt
 public:
     TFX_ColAsciiArt();
     // Dump source buffer to target, 2x2->1x1 sampling 
-    virtual void Dump2x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch = 160, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
+    virtual void Dump2x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch = 160, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
     virtual ~TFX_ColAsciiArt();
 };
 
@@ -169,11 +169,11 @@ public:
     // Build look-up table. 
     virtual void BuildLUT();
     // Dump source buffer to target, 1x1->1x1 sampling
-    virtual void Dump1x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch =  80, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
+    virtual void Dump1x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch =  80, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
     // Dump source buffer to target, 2x2->1x1 sampling 
-    virtual void Dump2x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch = 160, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
+    virtual void Dump2x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch = 160, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
     // Dump source buffer to target, 4x4->1x1 sampling 
-    virtual void Dump4x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch = 320, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
+    virtual void Dump4x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch = 320, int aTgtX0 = 0, int aTgtY0 = 0, short *aTarget = TFX_FrameBuffer);
     virtual ~TFX_BruteForce();
 private:
     int scan(int *data);

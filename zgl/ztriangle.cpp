@@ -163,6 +163,8 @@ __inline int find_mip(float s, float t, int cap)
 void ZB_fillTriangleMappingPerspective(ZBuffer *zb,
                             ZBufferPoint *p0,ZBufferPoint *p1,ZBufferPoint *p2)
 {
+    if (!zb->current_texture || !zb->current_texture->images[0].pixmap)
+        return;
     PIXEL *pixels;
 	GLImage *texture;
     float fdzdx,fndzdx;

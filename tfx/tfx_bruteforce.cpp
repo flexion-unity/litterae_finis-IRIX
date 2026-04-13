@@ -192,7 +192,7 @@ static int bilerp(int c0, int c1, int c2, int c3, int x, int y, int w, int h)
     return (cr << 0) | (cg << 8) | (cb << 16);
 }
 
-void TFX_BruteForce::Dump1x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
+void TFX_BruteForce::Dump1x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
 {
     int grid[8*14];
     int xsize = (aSrcQuad.x1 - aSrcQuad.x0);
@@ -223,7 +223,7 @@ void TFX_BruteForce::Dump1x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int 
 
 }
 
-void TFX_BruteForce::Dump2x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
+void TFX_BruteForce::Dump2x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
 {
     int grid[8*14];
     int xsize = (aSrcQuad.x1 - aSrcQuad.x0) / 2;
@@ -268,7 +268,7 @@ void TFX_BruteForce::Dump2x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int 
 
 }
 
-void TFX_BruteForce::Dump4x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
+void TFX_BruteForce::Dump4x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
 {
     int grid[8*14];
     int xsize = (aSrcQuad.x1 - aSrcQuad.x0) / 4;

@@ -186,7 +186,9 @@ void glopTexImage2D(GLContext *c,GLParam *p)
   im->ysize=height;
   if (im->pixmap!=NULL) gl_free(im->pixmap);
   im->pixmap=gl_malloc(width*height*4);
-  if(im->pixmap && pixels1) 
+  if (im->pixmap && !pixels1)
+    memset(im->pixmap, 0, width*height*4);
+  if(im->pixmap && pixels1)
   {
 	  if (components == 3)
 	  {

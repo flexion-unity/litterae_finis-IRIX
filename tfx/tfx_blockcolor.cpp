@@ -173,7 +173,7 @@ void TFX_BlockColor::BuildLUT()
 }
 
 
-void TFX_BlockColor::Dump1x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
+void TFX_BlockColor::Dump1x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
 {
     assert(mBlockMap!=NULL);
     int xsize = aSrcQuad.x1 - aSrcQuad.x0;
@@ -194,7 +194,7 @@ void TFX_BlockColor::Dump1x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int 
 
 
 
-void TFX_BlockColor::Dump2x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
+void TFX_BlockColor::Dump2x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
 {
     assert(mBlockMap!=NULL);
     int xsize = (aSrcQuad.x1 - aSrcQuad.x0) / 2;
@@ -256,7 +256,7 @@ void TFX_BlockColor::Dump2x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int 
 }
 
 
-void TFX_BlockColor::Dump4x(int *aSource, TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
+void TFX_BlockColor::Dump4x(int *aSource, const TFXQuad &aSrcQuad, int aSrcPitch, int aTgtX0, int aTgtY0, short *aTarget)
 {
 
     assert(mBlockMap!=NULL);

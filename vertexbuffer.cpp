@@ -1,6 +1,6 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <gl/tfxswgl.h>
+#include <GL/tfxswgl.h>
 #include "stb_image.h"
 
 #include "vertexbuffer.h"

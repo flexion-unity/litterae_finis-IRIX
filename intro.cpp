@@ -1,18 +1,14 @@
-#include <windows.h>
 #include <stdio.h>
 #include "textfx.h"
-#include "conio.h"
 
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <gl/tfxswgl.h>
+#include <GL/tfxswgl.h>
 #include "stb_image.h"
 
 #define SMOOTHSTEP(x) ((x)*(x)*(3-2*(x)))
-#pragma STFU(4305) // double-float
-#pragma STFU(4018) // signed/unsigned mismatch
 
-#include "include\scripts.h"
+#include "include/scripts.h"
 #include "hanska.h"
 
 
@@ -242,29 +238,29 @@ void draw_attractor4(float aTime, float tick)
 /* initialize state to random bits */
 static unsigned long state[16] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
 /* init should also reset this to 0 */
-static unsigned int index = 0;
+static unsigned int well_index = 0;
 void initwell(int v)
 {
 	int i;
 	for (i = 0; i < 16; i++)
 		state[i] = v + i;
-	index = 0;
+	well_index = 0;
 }
 /* return 32 bit random number */
 unsigned long well512(void)
 {
   unsigned long a, b, c, d;
-  a = state[index];
-  c = state[(index + 13) & 15];
+  a = state[well_index];
+  c = state[(well_index + 13) & 15];
   b = a ^ c ^ (a << 16) ^ (c << 15);
-  c = state[(index + 9) & 15];
+  c = state[(well_index + 9) & 15];
   c ^= (c >> 11);
-  a = state[index] = b ^ c;
+  a = state[well_index] = b ^ c;
   d = a ^ ((a << 5) & 0xDA442D20UL);
-  index = (index + 15) & 15;
-  a = state[index];
-  state[index] = a ^ b ^ d ^ (a << 2) ^ (b << 18) ^ (c << 28);
-  return state[index];
+  well_index = (well_index + 15) & 15;
+  a = state[well_index];
+  state[well_index] = a ^ b ^ d ^ (a << 2) ^ (b << 18) ^ (c << 28);
+  return state[well_index];
 }
 
 

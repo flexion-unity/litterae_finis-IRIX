@@ -1,4 +1,3 @@
-#include <Windows.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <GL/zgl.h>
@@ -467,7 +466,3 @@ void gl_draw_triangle_point(GLContext *c,
   if (p1->edge_flag) ZB_plot(c->zb,&p1->zp);
   if (p2->edge_flag) ZB_plot(c->zb,&p2->zp);
 }
-
-
-
-
